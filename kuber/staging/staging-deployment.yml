@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: color-code-deployment
+  namespace: incredible-dev
+  labels:
+    name: color-code
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: color-code
+  template:
+    metadata:
+      labels:
+        app: color-code
+    spec:
+      containers:
+        - name: color-code
+          image: CONTAINER_IMAGE
+          imagePullPolicy: Always
+          env:
+            - name: PORT
+              value: '3000'
+            - name: AUTH_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: idev-secrets
+                  key: COLOR_CODES_AUTH_TOKEN
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          securityContext:
+            privileged: false
+            readOnlyRootFilesystem: true
+            allowPrivilegeEscalation: false
+          resources:
+            requests:
+              cpu: 100m
+              memory: 64Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
