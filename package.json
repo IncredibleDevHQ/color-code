@@ -21,7 +21,7 @@
     "typescript": "^3.5.3",
     "vscode-oniguruma": "^1.5.1",
     "webpack": "^5.51.1",
-    "webpack-cli": "^3.3.12"
+    "webpack-cli": "^5.0.1"
   },
   "dependencies": {
     "cors": "^2.8.5",
